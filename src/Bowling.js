@@ -1,42 +1,51 @@
 class BowlingGame {
   constructor() {
-    this.rolls = [];
+    this.rolls = new Array(21).fill(0); // Array to hold rolls, similar to Java code
+    this.currentRoll = 0; // Keep track of the current roll index
   }
 
   roll(pins) {
-    this.rolls.push(pins);
+    this.rolls[this.currentRoll++] = pins; // Store the pins for the current roll
   }
 
   score() {
-    let totalScore = 0;
-    let rollIndex = 0;
+    let score = 0;
+    let frameIndex = 0;
 
     for (let frame = 0; frame < 10; frame++) {
-      if (this.isStrike(rollIndex)) {
-        totalScore += 10 + this.strikeBonus(rollIndex);
-        rollIndex += 1;
-      } else if (this.isSpare(rollIndex)) {
-        totalScore += 10 + this.rolls[rollIndex + 2];
-        rollIndex += 2;
+      if (this.isStrike(frameIndex)) {
+        score += 10 + this.strikeBonus(frameIndex);
+        frameIndex++;
+      } else if (this.isSpare(frameIndex)) {
+        score += 10 + this.rolls[frameIndex + 2];
+        frameIndex += 2;
       } else {
-        totalScore += this.rolls[rollIndex] + this.rolls[rollIndex + 1];
-        rollIndex += 2;
+        score += this.sumOfBallsInFrame(frameIndex);
+        frameIndex += 2;
       }
     }
 
-    return totalScore;
+    return score;
   }
 
-  isStrike(rollIndex) {
-    return this.rolls[rollIndex] === 10;
+  isStrike(frameIndex) {
+    return this.rolls[frameIndex] === 10;
   }
 
-  isSpare(rollIndex) {
-    return this.rolls[rollIndex] + this.rolls[rollIndex + 1] === 10;
+  isSpare(frameIndex) {
+    return this.rolls[frameIndex] + this.rolls[frameIndex + 1] === 10;
   }
 
-  strikeBonus(rollIndex) {
-    return this.rolls[rollIndex + 1] + this.rolls[rollIndex + 2];
+  sumOfBallsInFrame(frameIndex) {
+    return this.rolls[frameIndex] + this.rolls[frameIndex + 1];
+  }
+
+  spareBonus(frameIndex) {
+    return this.rolls[frameIndex + 2];
+  }
+
+  strikeBonus(frameIndex) {
+    return this.rolls[frameIndex + 1] + this.rolls[frameIndex + 2];
   }
 }
 

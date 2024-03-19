@@ -19,4 +19,10 @@ describe("Calcular puntaje de un juego de Bowling", () => {
     roll3.forEach(score => game3.roll(score));
     expect(game3.score()).toEqual(83);
   });
+  it("Deberia calcular el puntaje del juego con el strike", () => {
+    const game4 = new BowlingGame();
+    const roll4 = [1, 4, 5, 5, 6, 4, 2, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8];
+    roll4.forEach(score => game4.roll(score));
+    expect(game4.score()).toEqual(118);
+  });
 });
