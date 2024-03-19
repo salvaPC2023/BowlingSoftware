@@ -4,11 +4,15 @@ class BowlingGame {
   }
 
   roll(pins) {
-    this.rolls.push(pins);
+    this.rolls.push(...pins);
   }
 
   score() {
-    return 20;
+    let totalScore = 0;
+    for (let i = 0; i < this.rolls.length; i++) {
+      totalScore += this.rolls[i];
+    }
+    return totalScore;
   }
 }
 
