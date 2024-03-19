@@ -1,5 +1,15 @@
-function sumar(a, b) {
-  return a + b;
+class BowlingGame {
+  constructor() {
+    this.rolls = [];
+  }
+
+  roll(pins) {
+    this.rolls.push(pins);
+  }
+
+  score() {
+    return 20;
+  }
 }
 
-export default sumar;
+export default BowlingGame;

@@ -1,7 +1,11 @@
-import sumar from "./sumador.js";
+import BowlingGame from "./Bowling.js";
 
-describe("Sumar", () => {
-  it("deberia sumar dos numeros", () => {
-    expect(sumar(3, 2)).toEqual(5);
+describe("Calcular puntaje de un juego de Bowling", () => {
+  it("Deberia calcular el puntaje de el tiro mas basico", () => {
+    const game = new BowlingGame();
+    for (let i = 0; i < 20; i++) {
+      game.roll(1);
+    }
+    expect(game.score()).toEqual(20);
   });
 });
